@@ -11,15 +11,13 @@ jobs:
 
     steps:
       - name Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name Set up node
-        uses: actions/setup-node@v2
+      - name: Jest tests
+        id: jest-tests
+        uses: classroom-resources/autograding-command-grader@v1
         with:
-          node-version: 22.11.0
-
-      - name Install deps
-        run: npm install
-
-      - name: Run Jest
-        run: npx jest
+          test-name: Jest tests
+          setup-command: npm install jest;npm install
+          command: npm test
+          timeout: 3
