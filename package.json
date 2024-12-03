@@ -1,10 +1,14 @@
 {
-  "devDependencies": {
-    "@types/jest": "^29.5.14",
-    "@types/node": "^22.10.1",
-    "ts-jest": "^29.2.5"
-  },
-  "dependencies": {
-    "jest": "^29.7.0"
-  }
+   "devDependencies": {
+      "@types/jest": "^29.5.14",
+      "@types/node": "^22.10.1",
+      "ts-jest": "^29.2.5"
+   },
+   "scripts": {
+      "test": "npx jest",
+      "new": "ts-node init"
+   },
+   "dependencies": {
+      "jest": "^29.7.0"
+   }
 }
