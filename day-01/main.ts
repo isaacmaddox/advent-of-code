@@ -1,9 +1,15 @@
 import { readFileSync } from "fs";
 
-async function part01(): Promise<number> {
+const INPUT_PATH = process.cwd().endsWith("day-01") ? `${process.cwd()}\\input.txt` : `${process.cwd()}\\day-01\\input.txt`;
+
+function read(): string {
+   return readFileSync(INPUT_PATH).toString();
+}
+
+export async function part01(): Promise<number> {
    let answer: number = 0;
 
-   let contents: string = readFileSync("./input.txt").toString();
+   let contents: string = read();
    let split = contents.replace(/\s+/g, ' ').split(' ');
 
    let [lhs, rhs] = [
@@ -21,10 +27,10 @@ async function part01(): Promise<number> {
    return answer;
 }
 
-async function part02(): Promise<number> {
+export async function part02(): Promise<number> {
    let answer: number = 0;
 
-   let contents: string = readFileSync("./input.txt").toString();
+   let contents: string = read();
    let split = contents.replace(/\s+/g, ' ').split(' ');
    let rhsMap: Map<number, number> = new Map();
 
@@ -47,10 +53,11 @@ async function part02(): Promise<number> {
    return answer;
 }
 
-(async () => {
-   const p1Ans = await part01();
-   const p2Ans = await part02();
+if (require.main === module)
+   (async () => {
+      const p1Ans = await part01();
+      const p2Ans = await part02();
 
-   console.log(`Part 1: ${p1Ans}`);
-   console.log(`Part 2: ${p2Ans}`);
-})();
+      console.log(`Part 1: ${p1Ans} `);
+      console.log(`Part 2: ${p2Ans} `);
+   })();

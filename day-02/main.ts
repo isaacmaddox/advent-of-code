@@ -1,5 +1,11 @@
 import { readFileSync } from "fs";
 
+const INPUT_PATH = process.cwd().endsWith("day-02") ? `${process.cwd()}\\input.txt` : `${process.cwd()}\\day-02\\input.txt`;
+
+function read(): string {
+   return readFileSync(INPUT_PATH).toString();
+}
+
 function checkSafe(list: number[]): boolean {
    const dir = list[0] < list[1] ? 1 : -1;
 
@@ -15,9 +21,9 @@ function checkSafe(list: number[]): boolean {
    return true;
 }
 
-async function part01(): Promise<number> {
+export async function part01(): Promise<number> {
    let answer = 0;
-   const contents = readFileSync('./input.txt').toString();
+   const contents = read();
 
    const lists: number[][] = contents.split('\n').map(line => {
       return line.split(' ').map(n => Number(n));
@@ -30,9 +36,9 @@ async function part01(): Promise<number> {
    return answer;
 }
 
-async function part02(): Promise<number> {
+export async function part02(): Promise<number> {
    let answer = 0;
-   const contents = readFileSync('./input.txt').toString();
+   const contents = read();
 
    const lists: number[][] = contents.split('\n').map(line => {
       return line.split(' ').map(n => Number(n));
@@ -49,10 +55,6 @@ async function part02(): Promise<number> {
 
       perms.push(list);
 
-      if (list === lists[0]) {
-         console.log(perms);
-      }
-
       for (const permutation of perms) {
          if (checkSafe(permutation)) {
             ++answer;
@@ -64,10 +66,11 @@ async function part02(): Promise<number> {
    return answer;
 }
 
-(async () => {
-   const p1Ans = await part01();
-   const p2Ans = await part02();
+if (require.main === module)
+   (async () => {
+      const p1Ans = await part01();
+      const p2Ans = await part02();
 
-   console.log(`Part 1: ${p1Ans}`);
-   console.log(`Part 2: ${p2Ans}`);
-})();
+      console.log(`Part 1: ${p1Ans}`);
+      console.log(`Part 2: ${p2Ans}`);
+   })();
